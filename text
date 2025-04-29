@@ -1,0 +1,27 @@
+const mongoose = require("mongoose");
+
+const userSchema = new mongoose.Schema({
+  name: { type: String, required: true },
+  email: { type: String, required: true, unique: true },
+  photo: { type: String, required: true }, // ✅ User ka profile photo required
+
+  rollNumber: { type: String, required: true, unique: true },   // ✅ Roll Number required and unique
+  adharNumber: { type: String, required: true, unique: true },  // ✅ Aadhaar Number required and unique
+
+  certificate: { type: String },                // ✅ Certificate photo also required
+  fee: { 
+    type: String, 
+    // required: true, 
+    enum: ['Paid', 'Pending', 'Complete']                      // ✅ Only these 3 values allowed
+  },
+  fee:{
+type:String ,
+required : true,
+
+  },
+  course: { type: String, required: true },                     // ✅ Course Name required
+  idCard: { type: String },                                     // ID Card photo URL (optional)
+}, { timestamps: true });
+
+const User = mongoose.model("User", userSchema);
+module.exports = User;
