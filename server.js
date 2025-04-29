@@ -17,7 +17,12 @@ connectDB()
 app.use(cors()) //this allow all origin 
 
 // app.use(express.json());
-app.use(express.json());  // Add this line
+// app.use(express.json());  // Add this line
+app.use(cors({
+  origin: ['http://localhost:5173/', 'ttps://newportal.onrender.com'],
+  credentials: true
+}));
+
 app.use(bodyParser.json());
 // For form-data (optional if using multer)
 app.use(bodyParser.urlencoded({ extended: true }));
