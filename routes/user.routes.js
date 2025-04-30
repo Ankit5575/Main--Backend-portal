@@ -36,6 +36,87 @@ const streamUpload = (fileBuffer) => {
 };
 
 // ✅ Create User + Upload Photos
+//  // ✅ Create User + Upload Photos
+// router.post(
+//   "/create",
+//   upload.fields([
+//     { name: "photo", maxCount: 1 },
+//     { name: "certificate", maxCount: 1 },
+//     { name: "idCard", maxCount: 1 },
+//   ]),
+//   async (req, res) => {
+//     try {
+//       const { name, email, rollNumber, adharNumber, fee, course, months, timing , phone } = req.body;
+
+//       // Check if roll number already exists
+//       const existingRollNumber = await User.findOne({ rollNumber });
+//       if (existingRollNumber) {
+//         return res.status(400).json({
+//           success: false,
+//           message: "Roll Number already exists. Please use a different Roll Number.",
+//         });
+//       }
+
+//       // Check if email already exists
+//       const existingEmail = await User.findOne({ email });
+//       if (existingEmail) {
+//         return res.status(400).json({
+//           success: false,
+//           message: "Email already exists. Please use a different Email.",
+//         });
+//       }
+
+//       // Upload files to Cloudinary if they exist
+//       let photoUrl = "";
+//       let certificateUrl = "";
+//       let idCardUrl = "";
+
+//       if (req.files.photo && req.files.photo[0]) {
+//         const result = await streamUpload(req.files.photo[0].buffer);
+//         photoUrl = result.secure_url;
+//       }
+
+//       if (req.files.certificate && req.files.certificate[0]) {
+//         const result = await streamUpload(req.files.certificate[0].buffer);
+//         certificateUrl = result.secure_url;
+//       }
+
+//       if (req.files.idCard && req.files.idCard[0]) {
+//         const result = await streamUpload(req.files.idCard[0].buffer);
+//         idCardUrl = result.secure_url;
+//       }
+
+//       // Create new user if no duplicates found
+//       const newUser = new User({
+//         name,
+//         email,
+//         rollNumber,
+//         adharNumber,
+//         fee,
+//         timing,
+//         months,
+//         course,
+//         phone,
+//         photo: photoUrl,
+//         certificate: certificateUrl,
+//         idCard: idCardUrl,
+//       });
+
+//       await newUser.save();
+
+//       res.status(201).json({
+//         success: true,
+//         user: newUser,
+//       });
+//     } catch (err) {
+//       console.error("Error creating user:", err);
+//       res.status(500).json({
+//         success: false,
+//         error: err.message,
+//       });
+//     }
+//   }
+// );
  // ✅ Create User + Upload Photos
 router.post(
   "/create",
@@ -46,7 +127,7 @@ router.post(
   ]),
   async (req, res) => {
     try {
-      const { name, email, rollNumber, adharNumber, fee, course, months, timing } = req.body;
+      const { name, email, rollNumber, adharNumber, fee, course, months, timing, phone } = req.body;
 
       // Check if roll number already exists
       const existingRollNumber = await User.findOne({ rollNumber });
@@ -63,6 +144,15 @@ router.post(
         return res.status(400).json({
           success: false,
           message: "Email already exists. Please use a different Email.",
+        });
+      }
+
+      // ✅ Check if Aadhar Number already exists
+      const existingAadhar = await User.findOne({ adharNumber });
+      if (existingAadhar) {
+        return res.status(400).json({
+          success: false,
+          message: "Aadhar Number already exists. Please use a different Aadhar Number.",
         });
       }
 
@@ -96,6 +186,7 @@ router.post(
         timing,
         months,
         course,
+        phone,
         photo: photoUrl,
         certificate: certificateUrl,
         idCard: idCardUrl,
@@ -116,7 +207,7 @@ router.post(
     }
   }
 );
- 
+
 // EDIT ROUTES ///
 //only text edit 
 // ✅ For normal text update (no files)
