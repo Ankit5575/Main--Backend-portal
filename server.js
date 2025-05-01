@@ -33,11 +33,18 @@ app.get('/', (req, res) => {
 //user add routes
 const user = require("./routes/user.routes.js")
 const admin = require("./routes/adminRoutes.js")
+// const quiz = require("./routes/quiz.js")
  //upload Routes
 // const upload = require("./routes/upload.routes.js")
 //routes 
+const quizRoutes = require('./routes/quiz');
+
+app.use('/admin/quiz', quizRoutes); // 🔥 Route for admin
+
 app.use("/api/user" ,  user)
 app.use("/admin" ,  admin)
+// app.use("/admin/quiz" , quiz)
+ 
  // app.use("/api/user" ,upload)
 //app.use("admin routes / create user / edit user / delete user 
 // ")
