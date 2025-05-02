@@ -8,8 +8,8 @@ const userSchema = new mongoose.Schema({
   rollNumber: { type: String, required: true, unique: true }, // ✅ Roll Number required and unique
   adharNumber: {
     type: String,
-    required: true,
-    unique: true,
+    // required: true,
+    unique: true,               ///edit the adharcard 
     minlength: 12,
     maxlength: 12,
     validate: {
@@ -27,7 +27,7 @@ const userSchema = new mongoose.Schema({
   },
   course: { 
     type: String,
-    enum: ['Basic Computer', 'Web Development', 'Web Design', 'Tally Prime', 'Excel', 'ETEC'], // ✅ Predefined course names
+    enum: ['Basic Computer','DCA','Advanced Excel','Photoshop','CorelDraw','Advaanced Basic','ADC','Typing English','Typing Hindi' ,'Web Development', 'Web Design', 'Tally Prime', 'Excel', 'ETEC'], // ✅ Predefined course names
     required: true 
   }, // ✅ Course Name required
   idCard: { type: String }, // ID Card photo URL (optional)
