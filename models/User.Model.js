@@ -4,9 +4,16 @@ const userSchema = new mongoose.Schema({
   name: { type: String, required: true },
   email: { type: String, required: true, unique: true },
   photo: { type: String, required: true }, // ✅ User ka profile photo required
-
-  rollNumber: { type: String, required: true, unique: true }, // ✅ Roll Number required and unique
+  rollNumber: {
+    type: String,
+    required: true,
+    unique: true,
+    match: [/^(SN|NC)\d+$/, 'Roll Number must start with SN or NC followed by digits.'],
+  },
+  
+  // rollNumber: { type: String, required: true, unique: true }, // ✅ Roll Number required and unique
   adharNumber: {
+
     type: String,
     // required: true,
     unique: true,               ///edit the adharcard 

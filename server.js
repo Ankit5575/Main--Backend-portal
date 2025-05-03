@@ -12,7 +12,7 @@ dotenv.config()
 const PORT = process.env.PORT  || 6000 
 
 connectDB()
-
+                                          //every thing is perfect author $Ankit Sing ??
 //cors policy 
 app.use(cors()) //this allow all origin 
 
@@ -28,7 +28,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get('/', (req, res) => {
-  res.send('🙋‍♂️🙋‍♂️🙋‍♂️MUKUNDPUR HELP.IN')
+  res.send('🙋‍♂️🙋‍♂️🙋‍♂️JTTI HELP.IN')
 })
 //user add routes
 const user = require("./routes/user.routes.js")
